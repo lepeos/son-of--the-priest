@@ -1,0 +1,25 @@
+language: node_js
+node_js: node
+install:
+- npm install
+cache:
+  directories:
+  - node_modules
+before_deploy:
+- npm run build
+- git add dist -f
+- cd dist
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAID4Z5CTFHXAVBYPQ
+  secret_access_key:
+    secure: jAd9Eh+L+b/Mb6fMhI9vrbU1S23yRGiLyTtFb71RQhTfzILM6rUK3xMl6mkLnYrT2R9/pk6gUPMmJMb0SboE41F9q06JZP40QHLyByeUQtaHSQnh/0hmxQt9qFeb7R/f+v9cPRKsyg60LfPDZhsgvvz0+o5qc52r9WyF17DYISgM+PlJBSHHDN9SlXt7fL+jTWSah7lo5DlQREzIVTMKvM330/HBIXKV73KiMJtbzXFVO4cP2DuEwEx6iDg67QCWtEWjZRd6FMARbEM6E/CqtAMXeaZmvw6y91h/RZatTadfMXYseCYsuILQirm1IEgRwmu1/BOV+lYDiqKe5DnQNkL0YXEmKiRGKgTlMfp4lilefjItWvWnRLa8dFOfXE4zVJrjiRv5hfrXUJn1GE0c5c817SIXD649/BYI45K9yTcU7rnVkKduHoZP9GIDDVcJBLkpQLio3IQg4ftjvoHT6h1o39XnvpLTym8l0l9wuf1ZPiBGmb/caBWrM7K8SQcEadyX5Ck9pYGMTrq0tj928ovNFe1paXoE41XOt7D5R7U1XdrI0Pp3CEcIFVwiy+PMVlRgAS8V1vYSoYmjPk1hm30CX8v6NnUA3nch7Vk/3YzSuRQyDUnrF/aBeObkctLZoQxGvvS1sTYZ1FkniQaS7FS5U6WXde6h7biidZzEP0E=
+  region: eu-west-1
+  app: My First Elastic Beanstalk Application
+  env: sotp
+  bucket_name: elasticbeanstalk-eu-west-1-357914964404
+  skip_cleanup: true
+  file_glob: true
+  file: "**/*"
+  on:
+    repo: lepeos/son-of-the-priest
